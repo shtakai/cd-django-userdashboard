@@ -2,16 +2,19 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import forms
 from django.views.generic import View
 from django.views.generic.base import RedirectView
+from django.contrib import messages
+from .forms import RegistrationForm
 
 
 def index(request):
     print('index')
     context = {}
+    # messages.add_message(request, messages.ERROR, 'index')
     return render(request, 'index.html', context)
 
 
 class RegisterView(View):
-    form = forms.UserCreationForm
+    form = RegistrationForm
 
     def get(self, request):
         context = {
@@ -24,6 +27,7 @@ class RegisterView(View):
         form = self.form(request.POST)
         if form.is_valid():
             form.save()
+            messages.add_message(request, messages.SUCCESS, 'Registered.')
             return redirect('/success')
         else:
             context = {
