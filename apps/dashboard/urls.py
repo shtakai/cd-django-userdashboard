@@ -17,6 +17,9 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(r'^', views.index, name='dashboard_index'),
+    url(r'^$', views.index, name='dashboard_index'),
     url(r'^signup$', views.index, name='dashboard_signin'),
+    url(r'^register$', views.RegisterView.as_view(), name='dashboard_register'),
+    url(r'^success$', views.MainView.as_view()),
+    url(r'^main$', views.index, name='dashboard_main'),
 ]
