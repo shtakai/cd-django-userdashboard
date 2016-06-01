@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block title %}Dashboard{% endblock title %}
+{% block brand %}Sign In{% endblock brand %}
+
+{% block rightmenu %}
+<li><a href="{% url 'dashboard_signin' %}">Signin</a></li>
+<li><a href="{% url 'dashboard_register' %}">Register</a></li>
+{% endblock rightmenu %}
+
+{% block content %}
+
+  <!-- Main component for a primary marketing message or call to action -->
+  <h2>Sign In</h2>
+  <form action="{% url 'dashboard_signin' %}" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+      <button type="submit" class="btn btn-primary">
+        {% bootstrap_icon star %} Register
+      </button>
+    {% endbuttons %}
+  </form>
+
+{% endblock content %}
