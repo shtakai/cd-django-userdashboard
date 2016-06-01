@@ -24,5 +24,9 @@ class RegistrationForm(UserCreationForm):
         user.set_password(self.cleaned_data['password1'])
         if commit:
             print('===save')
+            if len(User.objects.all()) < 1:
+                user.is_superuser = True
             user.save()
             return user
+
+
