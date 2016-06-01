@@ -18,4 +18,5 @@ from . import views
 
 urlpatterns = [
     url(r'^', views.index, name='dashboard_index'),
+    url(r'^signup$', views.index, name='dashboard_signin'),
 ]
