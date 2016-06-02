@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock title %}
+{% block brand %}Dashboard{% endblock brand %}
+
+{% block rightmenu %}
+<li><a href="{% url 'logout' %}">Logout</a></li>
+{% endblock rightmenu %}
+
+{% block content %}
+<h1>{{ request.user.is_superuser }}</h1>
+{% if request.user.is_superuser %}
+<a href="{% url 'dashboard_create_user'%}" class="btn btn-primary">Add new</a>
+{% endif %}
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>email</th>
+      <th>created_at</th>
+      <th>user_level</th>
+      <th>actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in object_list %}
+    <tr>
+      <td>{{ user.id }}</td>
+      <td>{{ user.username }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.date_joined }}</td>
+      <td><{{ user.is_superuser }}/td>
+      <td>
+        {% if request.user.is_superuser %}
+          <a href="#">edit</a>
+          <a href="#">remove</a>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock content %}
